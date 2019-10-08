@@ -1,0 +1,93 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg">
+      <h2> <%= @recipe.name %>  </h2>
+    </div>
+  </div>
+  <div class="row"> 
+    <div class="col-lg">
+        <%= @recipe.description %> 
+    </div>
+  </div>
+  <hr/>
+  <h6> Ingredients</h6>
+  <div class="float-right" style="padding-right: 10px">
+    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">
+      Add Ingredient
+    </button>
+  </div>
+  <div class="container ingredient">
+    <% @recipe.ingredients.each do |ingredient| %>
+      <div class="row" style="width: 400px">
+        <div class="col-sm"> <%= ingredient.quantity.to_i %> </div>
+        <div class="col-sm col-4"> <%= ingredient.unit_of_measure %> </div>
+        <div class="col-sm col-8"> <%= ingredient.name %> </div>
+    </div>
+    <% end %>
+  </div>
+  <hr/>
+  <h6> Procedures</h6>
+  <div class="float-right" style="padding-right: 10px">
+    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#procedureModal">
+      Add Procedure
+    </button>
+  </div>
+  <div class="container procedure">
+    <% @recipe.procedures.each do |procedure| %>
+     <div class="row">
+      <div class="col-sm-1"> <%= procedure.step.to_i %> </div>
+       <div class="col-sm-8"> <%= procedure.description %> </div>
+       <div class="col-sm-2"></div>
+       <div>
+    <% end %>
+  </div>
+</div>
+
+<!-- Comment Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Add an Ingredient</h4>
+      </div>
+      <%= simple_form_for @ingredient, url: recipe_ingredients_path(@recipe) do |f| %>
+        <div class="modal-body">
+          <%= f.input :quantity, label: "Quantity" %>
+          <%= f.input :unit_of_measure, label: "Unit of Measure" %>
+          <%= f.input :name, label: "Name" %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <%= f.submit "Add Ingredient", class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<!-- Comment Modal -->
+<div class="modal fade" id="procedureModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Add a Procedure</h4>
+      </div>
+      <%= simple_form_for @procedure, url: recipe_procedures_path(@recipe) do |f| %>
+        <div class="modal-body">
+          <%= f.input :step, label: "Step" %>
+          <%= f.input :description, label: "Description" %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <%= f.submit "Add Procedure", class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg">
+      <h2> <%= @recipe.name %>  </h2>
+    </div>
+  </div>
+  <div class="row"> 
+    <div class="col-lg">
+        <%= @recipe.description %> 
+    </div>
+  </div>
+  <hr/>
+  <h6> Ingredients</h6>
+  <div class="float-right" style="padding-right: 10px">
+    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">
+      Add Ingredient
+    </button>
+  </div>
+  <div class="container">
+    <% @recipe.ingredients do |ingredient| %>
+      <div class="row">
+        <div class="col-sm"> <%= ingredient.quantity %> </div>
+        <div class="col-sm col-4"> <%= ingredient.unit_of_measure %> </div>
+        <div class="col-sm col-8"> <%= ingredient.name %> </div>
+    </div>
+    <% end %>
+  </div>
+</div>
