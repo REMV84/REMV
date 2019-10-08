@@ -11,18 +11,24 @@
   </div>
   <hr/>
   <h6> Ingredients</h6>
-  <div class="float-right" style="padding-right: 10px">
-    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">
-      Add Ingredient
-    </button>
-  </div>
-  <div class="container">
-    <% @recipe.ingredients do |ingredient| %>
-      <div class="row">
-        <div class="col-sm"> <%= ingredient.quantity %> </div>
+  <div class="container ingredient">
+    <% @recipe.ingredients.each do |ingredient| %>
+      <div class="row" style="width: 400px">
+        <div class="col-sm"> <%= ingredient.quantity.to_i %> </div>
         <div class="col-sm col-4"> <%= ingredient.unit_of_measure %> </div>
         <div class="col-sm col-8"> <%= ingredient.name %> </div>
     </div>
+    <% end %>
+  </div>
+  <hr/>
+  <h6> Procedures</h6>
+  <div class="container procedure">
+    <% @recipe.procedures.each do |procedure| %>
+     <div class="row">
+      <div class="col-sm-1"> <%= procedure.step.to_i %> </div>
+       <div class="col-sm-8"> <%= procedure.description %> </div>
+       <div class="col-sm-2"></div>
+     </div>
     <% end %>
   </div>
 </div>
